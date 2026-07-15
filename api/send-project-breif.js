@@ -1,13 +1,9 @@
-export function GET() {
-  return Response.json({
-    success: true,
-    message: "API route is working."
-  });
-}
-
-export function POST() {
-  return Response.json({
-    success: true,
-    message: "POST request received."
-  });
-}
+export default {
+  fetch(request) {
+    return Response.json({
+      success: true,
+      method: request.method,
+      message: "API route is working."
+    });
+  }
+};
