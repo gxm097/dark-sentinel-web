@@ -685,62 +685,90 @@
 
 </script>
 <script>
-  const contactForm = document.getElementById("contactForm");
-  const formStatus = document.getElementById("formStatus");
-  const submitButton = contactForm.querySelector('button[type="submit"]');
+  document.addEventListener("DOMContentLoaded", () => {
+    const contactForm = document.getElementById("contactForm");
+    const formStatus = document.getElementById("formStatus");
+    const submitButton = contactForm?.querySelector(
+      'button[type="submit"]'
+    );
 
-  contactForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    if (!contactForm.checkValidity()) {
-      contactForm.reportValidity();
+    if (!contactForm || !formStatus || !submitButton) {
+      console.error("Contact form elements were not found.", {
+        contactForm,
+        formStatus,
+        submitButton
+      });
       return;
     }
 
-    submitButton.disabled = true;
-    submitButton.textContent = "Sending...";
-    formStatus.textContent = "";
+    console.log("Contact form script loaded.");
 
-    const formData = new FormData(contactForm);
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      console.log("Contact form submitted.");
 
-    const submission = {
-      name: formData.get("name"),
-      company: formData.get("company"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      description: formData.get("description"),
-      budget: formData.get("budget"),
-      timeline: formData.get("timeline")
-    };
-
-    try {
-      const response = await fetch("/api/send-project-brief.js", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(submission)
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "The form could not be submitted.");
+      if (!contactForm.checkValidity()) {
+        console.log("Form validation failed.");
+        contactForm.reportValidity();
+        return;
       }
 
-      formStatus.textContent =
-        "Your project brief has been sent successfully.";
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+      formStatus.textContent = "";
 
-      contactForm.reset();
-    } catch (error) {
-      console.error("Contact form error:", error);
+      const formData = new FormData(contactForm);
 
-      formStatus.textContent =
-        "The form could not be sent. Please try again.";
-    } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = "Send Project Brief";
-    }
+      const submission = {
+        name: formData.get("name"),
+        company: formData.get("company"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        description: formData.get("description"),
+        budget: formData.get("budget"),
+        timeline: formData.get("timeline")
+      };
+
+      console.log("Sending form data:", submission);
+
+      try {
+        const response = await fetch(
+          "/api/send-project-brief.js",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(submission)
+          }
+        );
+
+        console.log("API response status:", response.status);
+
+        const result = await response.json();
+        console.log("API response:", result);
+
+        if (!response.ok) {
+          throw new Error(
+            result.error || "The form could not be submitted."
+          );
+        }
+
+        formStatus.textContent =
+          "Your project brief has been sent successfully.";
+
+        contactForm.reset();
+      } catch (error) {
+        console.error("Contact form error:", error);
+
+        formStatus.textContent =
+          error.message ||
+          "The form could not be sent. Please try again.";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Send Project Brief";
+      }
+    });
   });
 </script>
 </body>
