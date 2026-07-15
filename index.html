@@ -153,13 +153,62 @@
     .process-step-desc{font-size:11px;color:var(--gray-mid);line-height:1.6;}
 
     #technologies{background:var(--charcoal);}
-    .tech-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;}
-    .tech-item{background:var(--charcoal);padding:28px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;transition:background var(--transition);}
-    .tech-item:hover{background:var(--charcoal-3);}
-    .tech-icon{width:36px;height:36px;border:1px solid var(--border);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;background:var(--charcoal-3);transition:border-color var(--transition);}
-    .tech-item:hover .tech-icon{border-color:var(--border-red);}
-    .tech-icon svg{width:18px;height:18px;}
-    .tech-name{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-mid);}
+    .tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .tech-item{
+      min-height:190px;
+      padding:30px 28px;
+      background:var(--charcoal-2);
+      border:1px solid var(--border);
+      border-radius:var(--radius-md);
+      transition:transform var(--transition),background var(--transition),border-color var(--transition),box-shadow var(--transition);
+    }
+    .tech-item:hover{
+      transform:translateY(-3px);
+      background:var(--charcoal-3);
+      border-color:var(--border-red);
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
+    }
+    .tech-category{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:var(--white);
+      margin-bottom:18px;
+    }
+    .tech-category::after{
+      content:"";
+      display:block;
+      width:28px;
+      height:2px;
+      margin-top:12px;
+      background:var(--gray-dim);
+      transition:width var(--transition),background var(--transition);
+    }
+    .tech-item:hover .tech-category::after{
+      width:44px;
+      background:var(--red);
+    }
+    .tech-list{display:flex;flex-direction:column;gap:8px;}
+    .tech-list li{
+      position:relative;
+      padding-left:14px;
+      font-size:13px;
+      color:var(--gray-mid);
+      line-height:1.55;
+      transition:color var(--transition);
+    }
+    .tech-list li::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.72em;
+      width:4px;
+      height:4px;
+      border-radius:50%;
+      background:var(--gray-dim);
+    }
+    .tech-item:hover .tech-list li{color:var(--gray-light);}
 
     #faq{background:var(--charcoal);}
     .faq-list{max-width:760px;margin:0 auto;border-top:1px solid var(--border);}
@@ -191,6 +240,7 @@
     .form-select option{background:var(--charcoal-3);}
     .form-textarea{resize:vertical;min-height:116px;}
     .form-submit{width:100%;padding:16px 30px;margin-top:4px;font-size:12px;}
+    .form-status{min-height:22px;margin-top:14px;text-align:center;font-size:13px;color:var(--gray-light);}
     .form-note{font-size:12px;color:var(--gray-dim);margin-top:16px;text-align:center;}
 
     footer{background:var(--charcoal);border-top:1px solid var(--border);padding:64px 0 36px;}
@@ -223,7 +273,7 @@
       .industries-list{grid-template-columns:repeat(2,1fr);}
       .process-grid{grid-template-columns:repeat(4,1fr);}
       .process-step:nth-child(4){border-right:none;}
-      .tech-grid{grid-template-columns:repeat(4,1fr);}
+      .tech-grid{grid-template-columns:1fr;}
       .contact-layout{grid-template-columns:1fr;gap:56px;}
       .contact-left{position:static;}
       .footer-top{grid-template-columns:1fr 1fr;}
@@ -241,7 +291,7 @@
       .industries-list{grid-template-columns:1fr;}
       .process-grid{grid-template-columns:repeat(2,1fr);}
       .process-step:nth-child(2n){border-right:none;}
-      .tech-grid{grid-template-columns:repeat(3,1fr);}
+      .tech-grid{grid-template-columns:1fr;}
       .why-features{grid-template-columns:1fr;}
       .footer-top{grid-template-columns:1fr;}
       .footer-bottom{flex-direction:column;align-items:flex-start;}
@@ -254,7 +304,7 @@
       #navbar{padding:0 12px;}
       .process-grid{grid-template-columns:1fr;}
       .process-step{border-right:none;border-bottom:1px solid var(--border);}
-      .tech-grid{grid-template-columns:repeat(2,1fr);}
+      .tech-grid{grid-template-columns:1fr;}
       .hero-stats{flex-direction:column;gap:24px;}
     }
     @media (prefers-reduced-motion:reduce){
@@ -377,20 +427,133 @@
 </div></div></section>
 <section id="technologies" class="section" style="background:var(--charcoal);">
 <div class="container">
-<div class="section-header centered reveal"><span class="label">Our Stack</span><h2 class="heading-lg">Production-Proven Technologies</h2><p class="body-lg">We use tools with strong ecosystems, long support windows, and real production track records.</p></div>
-<div class="tech-grid">
-<div class="tech-item reveal "><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="2.2"/><ellipse cx="12" cy="12" rx="10" ry="4.2"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)"/></svg></div><span class="tech-name">React</span></div>
-<div class="tech-item reveal reveal-d1"><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9.5"/><path d="M9 8.5v7l8-7.5v8"/></svg></div><span class="tech-name">Next.js</span></div>
-<div class="tech-item reveal reveal-d2"><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 9h4M10 9v7M14.5 16c.5.5 1.2.8 2 .8 1.2 0 2-.6 2-1.6 0-2-3.7-1-3.7-3 0-.9.8-1.5 2-1.5.8 0 1.5.3 1.9.8"/></svg></div><span class="tech-name">TypeScript</span></div>
-<div class="tech-item reveal reveal-d3"><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2l8 4.6v10.8L12 22l-8-4.6V6.6L12 2z"/><path d="M9 12h6M12 9v6"/></svg></div><span class="tech-name">Node.js</span></div>
-<div class="tech-item reveal reveal-d4"><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2c-3 0-3.5 1.3-3.5 2.6v2.2H12v.8H6.8C5 7.6 4 8.9 4 12s1 4.4 2.8 4.4h1.4v-2.6c0-2 1.7-3.6 3.8-3.6h3.6c1.7 0 3-1.4 3-3.1V4.6C18.6 3.3 17 2 12 2z"/><path d="M12 22c3 0 3.5-1.3 3.5-2.6v-2.2H12v-.8h5.2c1.8 0 2.8-1.3 2.8-4.4s-1-4.4-2.8-4.4h-1.4v2.6c0 2-1.7 3.6-3.8 3.6H8.4c-1.7 0-3 1.4-3 3.1v2.7C5.4 20.7 7 22 12 22z"/><circle cx="9" cy="5" r="0.5" fill="currentColor"/><circle cx="15" cy="19" r="0.5" fill="currentColor"/></svg></div><span class="tech-name">Python</span></div>
-<div class="tech-item reveal "><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="11" width="3.2" height="3.2"/><rect x="6" y="11" width="3.2" height="3.2"/><rect x="10" y="11" width="3.2" height="3.2"/><rect x="6" y="7" width="3.2" height="3.2"/><rect x="10" y="7" width="3.2" height="3.2"/><path d="M2 14.5h18c1.5 0 2-2 3.5-2.3M2 14.5c0 3.5 2.8 6 7.5 6 5.8 0 9.4-2.8 10.8-6"/></svg></div><span class="tech-name">Docker</span></div>
-<div class="tech-item reveal reveal-d1"><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 16c4 2.5 14 2.5 18 0"/><path d="M7 12.5c0-2.5 1.8-4 4-4 1.5 0 2.7.7 3.4 1.8"/><path d="M14.5 14.5c1 0 2-.5 2-1.8s-1-1.8-2-1.8c-.4-1.5-1.7-2.6-3.3-2.6"/><path d="M17 18.5l2-1M20 17l1.5 2.5-2.5 1"/></svg></div><span class="tech-name">AWS</span></div>
-<div class="tech-item reveal reveal-d2"><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M10 3h5.5L9 14h6.5L7 21l2-9H4z"/></svg></div><span class="tech-name">Azure</span></div>
-<div class="tech-item reveal reveal-d3"><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.3-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.5-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .6 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg></div><span class="tech-name">GitHub</span></div>
-<div class="tech-item reveal reveal-d4"><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9.5 3.5l2.5-1.5 2.5 1.5v3l2.5 1.5v3l-2.5 1.5v3l-2.5 1.5-2.5-1.5v-3L7 13v-3l2.5-1.5v-3z"/><circle cx="12" cy="12" r="2"/></svg></div><span class="tech-name">OpenAI</span></div>
-<div class="tech-item reveal reveal-d5"><div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 4h3l5.5 16h-3.2L13 16H7l-1.3 4H2.5L9 4z"/><path d="M8 12.5h4.6"/></svg></div><span class="tech-name">Anthropic</span></div>
-</div></div></section>
+  <div class="section-header centered reveal">
+    <span class="label">Our Capabilities</span>
+    <h2 class="heading-lg">Technologies We Build With</h2>
+    <p class="body-lg">We select technologies based on business requirements, long-term maintainability, security, and scalability—not trends.</p>
+  </div>
+
+  <div class="tech-grid">
+    <article class="tech-item reveal">
+      <h3 class="tech-category">Frontend</h3>
+      <ul class="tech-list">
+        <li>React</li>
+        <li>Next.js</li>
+        <li>TypeScript</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal reveal-d1">
+      <h3 class="tech-category">Backend</h3>
+      <ul class="tech-list">
+        <li>Node.js</li>
+        <li>Python</li>
+        <li>.NET</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal reveal-d2">
+      <h3 class="tech-category">Cloud</h3>
+      <ul class="tech-list">
+        <li>AWS</li>
+        <li>Azure</li>
+        <li>Cloudflare</li>
+        <li>Vercel</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal">
+      <h3 class="tech-category">Databases</h3>
+      <ul class="tech-list">
+        <li>PostgreSQL</li>
+        <li>SQL Server</li>
+        <li>MySQL</li>
+        <li>Redis</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal reveal-d1">
+      <h3 class="tech-category">APIs & Integration</h3>
+      <ul class="tech-list">
+        <li>REST APIs</li>
+        <li>GraphQL</li>
+        <li>Webhooks</li>
+        <li>Third-Party Integrations</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal reveal-d2">
+      <h3 class="tech-category">DevOps</h3>
+      <ul class="tech-list">
+        <li>Docker</li>
+        <li>GitHub Actions</li>
+        <li>CI/CD Pipelines</li>
+        <li>Infrastructure as Code</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal">
+      <h3 class="tech-category">Security</h3>
+      <ul class="tech-list">
+        <li>OAuth 2.0</li>
+        <li>OpenID Connect</li>
+        <li>SSO & Role-Based Access</li>
+        <li>Encryption & Audit Logging</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal reveal-d1">
+      <h3 class="tech-category">AI & Automation</h3>
+      <ul class="tech-list">
+        <li>AI Assistants</li>
+        <li>Document Processing</li>
+        <li>Workflow Automation</li>
+        <li>Model & API Integration</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal reveal-d2">
+      <h3 class="tech-category">Infrastructure</h3>
+      <ul class="tech-list">
+        <li>Linux</li>
+        <li>Containers</li>
+        <li>Networking</li>
+        <li>Serverless Platforms</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal">
+      <h3 class="tech-category">Monitoring</h3>
+      <ul class="tech-list">
+        <li>Centralized Logging</li>
+        <li>Metrics & Dashboards</li>
+        <li>Alerting</li>
+        <li>Application Health Monitoring</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal reveal-d1">
+      <h3 class="tech-category">Business Systems</h3>
+      <ul class="tech-list">
+        <li>Microsoft 365</li>
+        <li>CRM Platforms</li>
+        <li>ERP Systems</li>
+        <li>Identity Providers</li>
+      </ul>
+    </article>
+
+    <article class="tech-item reveal reveal-d2">
+      <h3 class="tech-category">Architecture</h3>
+      <ul class="tech-list">
+        <li>Modular Applications</li>
+        <li>Microservices</li>
+        <li>Event-Driven Systems</li>
+        <li>Serverless Architecture</li>
+      </ul>
+    </article>
+  </div>
+</div>
+</section>
 <section id="faq" class="section" style="background:var(--charcoal);">
 <div class="container">
 <div class="section-header centered reveal"><span class="label">Common Questions</span><h2 class="heading-lg">Answers Before You Ask</h2><p class="body-lg">Everything you need to know before starting a project with us.</p></div>
@@ -520,19 +683,6 @@
     });
   });
 
-  document.getElementById("contactForm").addEventListener("submit", e => {
-    e.preventDefault();
-    const btn = e.target.querySelector(".form-submit");
-    btn.textContent = "Message Sent";
-    btn.style.background = "#8F0D17";
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = "Send Project Brief";
-      btn.style.background = "";
-      btn.disabled = false;
-      e.target.reset();
-    }, 4000);
-  });
 </script>
 <script>
   const contactForm = document.getElementById("contactForm");
