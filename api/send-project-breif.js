@@ -47,7 +47,7 @@ export async function POST(request) {
     if (!emailPattern.test(email)) {
       return Response.json(
         {
-          error: "Please provide a valid email address."
+          error: "Please enter a valid email address."
         },
         {
           status: 400
@@ -55,31 +55,38 @@ export async function POST(request) {
       );
     }
 
-    const safeName = escapeHtml(name);
-    const safeCompany = escapeHtml(company || "Not provided");
-    const safeEmail = escapeHtml(email);
-    const safePhone = escapeHtml(phone || "Not provided");
-    const safeDescription = escapeHtml(description).replaceAll("\n", "<br>");
-    const safeBudget = escapeHtml(budget || "Not provided");
-    const safeTimeline = escapeHtml(timeline || "Not provided");
-
     const { data, error } = await resend.emails.send({
-      from: "Dark Sentinel Website <website@darksentineltechnologies.com>",
+      from:
+        "Dark Sentinel Website <website@darksentineltechnologies.com>",
+
       to: ["montalbano@darksentineltechnologies.com"],
+
       replyTo: email,
+
       subject: `New project brief from ${name}`,
+
       html: `
         <h2>New Project Brief</h2>
 
-        <p><strong>Name:</strong> ${safeName}</p>
-        <p><strong>Company:</strong> ${safeCompany}</p>
-        <p><strong>Email:</strong> ${safeEmail}</p>
-        <p><strong>Phone:</strong> ${safePhone}</p>
-        <p><strong>Budget:</strong> ${safeBudget}</p>
-        <p><strong>Timeline:</strong> ${safeTimeline}</p>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Company:</strong> ${
+          escapeHtml(company) || "Not provided"
+        }</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Phone:</strong> ${
+          escapeHtml(phone) || "Not provided"
+        }</p>
+        <p><strong>Budget:</strong> ${
+          escapeHtml(budget) || "Not provided"
+        }</p>
+        <p><strong>Timeline:</strong> ${
+          escapeHtml(timeline) || "Not provided"
+        }</p>
 
         <h3>Project Description</h3>
-        <p>${safeDescription}</p>
+        <p>
+          ${escapeHtml(description).replaceAll("\n", "<br>")}
+        </p>
       `
     });
 
