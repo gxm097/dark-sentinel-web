@@ -693,22 +693,14 @@
     );
 
     if (!contactForm || !formStatus || !submitButton) {
-      console.error("Contact form elements were not found.", {
-        contactForm,
-        formStatus,
-        submitButton
-      });
+      console.error("Contact form elements were not found.");
       return;
     }
 
-    console.log("Contact form script loaded.");
-
     contactForm.addEventListener("submit", async (event) => {
       event.preventDefault();
-      console.log("Contact form submitted.");
 
       if (!contactForm.checkValidity()) {
-        console.log("Form validation failed.");
         contactForm.reportValidity();
         return;
       }
@@ -729,24 +721,29 @@
         timeline: formData.get("timeline")
       };
 
-      console.log("Sending form data:", submission);
-
       try {
-        const response = await fetch(
-          "/api/send-project-brief.js",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(submission)
-          }
-        );
+        const response = await fetch("/api/send-project-brief", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(submission)
+        });
 
-        console.log("API response status:", response.status);
+        const contentType =
+          response.headers.get("content-type") || "";
 
-        const result = await response.json();
-        console.log("API response:", result);
+        let result;
+
+        if (contentType.includes("application/json")) {
+          result = await response.json();
+        } else {
+          const responseText = await response.text();
+
+          throw new Error(
+            `Server returned ${response.status} instead of JSON. ${responseText.slice(0, 120)}`
+          );
+        }
 
         if (!response.ok) {
           throw new Error(
