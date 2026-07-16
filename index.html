@@ -80,8 +80,7 @@
     .hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:80px 80px;mask-image:linear-gradient(to bottom,transparent 0%,black 20%,black 70%,transparent 100%);}
     .hero-bg-glow{position:absolute;right:-10%;top:10%;width:60%;height:60%;background:radial-gradient(ellipse at center,rgba(193,18,31,0.08) 0%,transparent 65%);pointer-events:none;}
     .hero-logo-bg{position:absolute;right:2%;top:52%;height:600px;transform:translateY(-50%);width:1200px;pointer-events:none;user-select:none;}
-    .hero-inner{max-width:1160px;margin:0 auto;margin-left:160px;padding:0 20px;position:relative;z-index:1;width:100%;}
-    .hero-rule{width:40px;height:1px;background:var(--red);margin-bottom:28px;}
+    .hero-inner{max-width:1160px; width:100%; margin:0 auto; padding:0 32px; position:relative; z-index:1;}    .hero-rule{width:40px;height:1px;background:var(--red);margin-bottom:28px;}
     .hero-title{font-family:var(--font-display);font-size:clamp(54px,6.8vw,94px);font-weight:400;line-height:.94;letter-spacing:.02em;color:var(--white);max-width:760px;margin-bottom:30px;}
     .hero-title span{color:var(--red);}
     .hero-sub{font-size:17px;color:var(--gray-light);line-height:1.72;max-width:500px;margin-bottom:36px;}
@@ -298,6 +297,43 @@
       .form-row{grid-template-columns:1fr;}
       .contact-form{padding:28px 24px;}
       .hero-logo-bg{display:none;}
+
+      #hero{
+        min-height:auto;
+        padding-top:110px;
+        padding-bottom:72px;
+        align-items:flex-start;
+      }
+
+      .hero-inner{
+        margin:0;
+        padding:0 20px;
+        max-width:100%;
+      }
+
+      .hero-title{
+        font-size:clamp(48px,14vw,68px);
+        line-height:.94;
+        max-width:100%;
+        margin-bottom:24px;
+      }
+
+      .hero-sub{
+        max-width:100%;
+        font-size:16px;
+        line-height:1.65;
+      }
+
+      .hero-actions{
+        width:100%;
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .hero-actions .btn{
+        width:100%;
+        justify-content:center;
+      }
     }
     @media (max-width:480px){
       .nav-brand-text{max-width:160px;}
