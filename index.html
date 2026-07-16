@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="icon" type="image/png" href="shield.png">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -758,7 +759,7 @@
       };
 
       try {
-        const response = await fetch("/api/send-project-brief.js", {
+        const response = await fetch("/api/send-project-brief", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
